@@ -1,38 +1,7 @@
-// src/App.jsx
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Usamos axios para las solicitudes HTTP
+// src/components/AddGames.js
+import React, { useState } from 'react';
+import axios from 'axios';
 
-// Componente para mostrar los juegos
-const GameList = () => {
-  const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    // Obtener los juegos desde el backend
-    axios.get('http://localhost:5000/api/games')  // URL del backend
-      .then(response => {
-        setGames(response.data); // Guardamos los juegos en el estado
-      })
-      .catch(error => {
-        console.error('Hubo un error al obtener los juegos', error);
-      });
-  }, []);
-
-  return (
-    <div>
-      <h1>Biblioteca de Juegos</h1>
-      <ul>
-        {games.map(game => (
-          <li key={game._id}>
-            <h2>{game.name}</h2>
-            <p>{game.genre} - {game.platform}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-// Componente para agregar un juego
 const AddGame = () => {
   const [name, setName] = useState('');
   const [genre, setGenre] = useState('');
@@ -42,11 +11,13 @@ const AddGame = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Crear el nuevo juego con los datos del formulario
+      // Crear un objeto con los datos del formulario
       const newGame = { name, genre, platform, hoursPlayed };
+      
       // Enviar los datos al backend
-      await axios.post('http://localhost:5000/api/games', newGame);  // URL del backend
+      await axios.post('http://localhost:5000/api/games', newGame);  // Asegúrate de que la URL esté correcta
       alert('Juego agregado con éxito');
+      
       // Limpiar el formulario después de agregar el juego
       setName('');
       setGenre('');
@@ -95,14 +66,4 @@ const AddGame = () => {
   );
 };
 
-const App = () => {
-  return (
-    <div className="App">
-      <h1>Bienvenido a GameTracker</h1>
-      <AddGame />  {/* Aquí agregamos el formulario */}
-      <GameList />  {/* Aquí mostramos la lista de juegos */}
-    </div>
-  );
-};
-
-export default App;
+export default AddGame;

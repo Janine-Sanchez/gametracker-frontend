@@ -10,14 +10,17 @@ const AddGame = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+
+    // Verificar los datos antes de enviarlos
+    const newGame = { name, genre, platform, hoursPlayed };
+    console.log("Datos del juego a enviar:", newGame);  // Agrega esto para comprobar los datos
+
     try {
-      // Crear un objeto con los datos del formulario
-      const newGame = { name, genre, platform, hoursPlayed };
-      
       // Enviar los datos al backend
-      await axios.post('http://localhost:5000/api/games', newGame);  // Asegúrate de que la URL esté correcta
+      await axios.post('http://localhost:5000/api/games', newGame);
       alert('Juego agregado con éxito');
-      
+
       // Limpiar el formulario después de agregar el juego
       setName('');
       setGenre('');

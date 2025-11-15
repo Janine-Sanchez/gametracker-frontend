@@ -1,4 +1,3 @@
-// src/components/FormularioJuego.jsx
 import React, { useState, useEffect } from 'react';
 import { api } from '../api';
 import { useParams, useNavigate } from 'react-router-dom';

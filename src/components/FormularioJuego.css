@@ -1,5 +1,3 @@
-/* src/components/FormularioJuego.css */
-
 /* Contenedor general para el formulario */
 .formulario-container {
   display: flex;
@@ -9,7 +7,7 @@
   background-color: #f7f9fc;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
-  justify-content: flex-start; /* Para asegurarse de que el footer quede abajo */
+  justify-content: flex-start; 
   box-sizing: border-box;
 }
 

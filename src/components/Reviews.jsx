@@ -1,8 +1,7 @@
-// src/components/Reviews.jsx
 import React, { useState, useEffect } from 'react';
 import { api } from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
-import './Reviews.css'; // Mantén el archivo CSS global
+import './Reviews.css'; 
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);

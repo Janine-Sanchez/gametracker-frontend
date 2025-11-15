@@ -1,5 +1,3 @@
-// src/components/PantallaPrincipal.jsx
-import React from 'react';
 import { Link } from 'react-router-dom';
 import './PantallaPrincipal.css';  
 

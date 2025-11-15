@@ -1,4 +1,3 @@
-// src/components/BibliotecaJuegos.jsx
 import React, { useState, useEffect } from 'react';
 import { api } from '../api'; 
 import { Link, useNavigate } from 'react-router-dom'; 

@@ -1,6 +1,4 @@
-// src/App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Usar Routes en lugar de Switch
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import PantallaPrincipal from './components/PantallaPrincipal';
 import BibliotecaJuegos from './components/BibliotecaJuegos';
 import Reseñas from './components/Reviews';
@@ -11,7 +9,7 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-        <Routes>  {/* Usamos Routes en lugar de Switch */}
+        <Routes> 
           {/* Ruta principal */}
           <Route path="/" element={<PantallaPrincipal />} />
 

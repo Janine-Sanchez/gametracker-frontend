@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { api } from '../api';  // Esto es para hacer las peticiones al backend
-import TarjetaJuego from './TarjetaJuego';  // Este es el componente que mostrará cada juego
+// src/components/BibliotecaJuegos.jsx
+import { useEffect, useState } from "react";
+import { api } from "../api"; // Asegúrate de importar correctamente el archivo 'api.js'
+import TarjetaJuego from "./TarjetaJuego";
 
 export default function BibliotecaJuegos() {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
-    // Obtener los juegos desde el backend
-    api.get('/games')
+    api.get('/games')  // Realiza una solicitud GET para obtener los juegos
       .then((response) => {
-        setGames(response.data);
+        setGames(response.data);  // Guarda los juegos en el estado
       })
       .catch((error) => {
         console.error('Hubo un error al obtener los juegos:', error);

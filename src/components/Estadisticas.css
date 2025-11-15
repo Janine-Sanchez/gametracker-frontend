@@ -1,0 +1,75 @@
+/* Estadisticas.css */
+
+/* Contenedor principal de la página de estadísticas */
+.stats-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra todo horizontalmente */
+  min-height: 100vh; /* Ocupa al menos toda la altura de la pantalla */
+  padding: 40px 20px;
+  background-color: #f0f4f8; /* Fondo de página suave */
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.stats-page-container h1 {
+  font-size: 2.5rem;
+  color: #2c3e50; /* Un color oscuro pero suave */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+/* Tarjeta de estadísticas */
+.stat-card {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.stat-card p {
+  font-size: 1.5rem; /* Tamaño grande para los números */
+  color: #34495e;
+  margin: 0;
+}
+
+.stat-card p:first-of-type {
+  margin-bottom: 15px; /* Espacio entre las dos estadísticas */
+  font-weight: bold; /* Destaca el primer dato */
+}
+
+/* --- Botón de Volver --- */
+.retroceder-btn {
+  margin-top: 30px; /* Espacio entre la tarjeta y el botón */
+  padding: 12px 25px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.retroceder-btn:hover {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+  transform: translateY(-2px); /* Efecto "bonito" al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Footer --- */
+.stats-page-container footer {
+  margin-top: auto; /* ¡Este es el truco para que baje! */
+  padding: 20px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #888;
+  width: 100%;
+}

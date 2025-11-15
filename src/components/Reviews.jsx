@@ -1,6 +1,8 @@
+// src/components/Reviews.jsx
 import React, { useState, useEffect } from 'react';
 import { api } from '../api';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import './Reviews.css'; // Mantén el archivo CSS global
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -11,9 +13,9 @@ const Reviews = () => {
   const [recomendaria, setRecomendaria] = useState(false);
   const [editingReview, setEditingReview] = useState(null);
 
-  const { gameId } = useParams();  // Aquí obtenemos el gameId desde la URL
+  const { gameId } = useParams();
+  const navigate = useNavigate();
 
-  // Obtener las reseñas del juego específico
   useEffect(() => {
     if (gameId) {
       api.get(`/games/${gameId}/reviews`)
@@ -22,18 +24,9 @@ const Reviews = () => {
     }
   }, [gameId]);
 
-  // Función para agregar o actualizar la reseña
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    const nuevaReseña = { 
-      textoReseña, 
-      rating, 
-      horasJugadas, 
-      dificultad, 
-      recomendaria, 
-      juegoId: gameId 
-    };
+    const nuevaReseña = { textoReseña, rating, horasJugadas, dificultad, recomendaria, juegoId: gameId };
 
     if (editingReview) {
       api.put(`/reviews/${editingReview._id}`, nuevaReseña)
@@ -79,21 +72,21 @@ const Reviews = () => {
   };
 
   return (
-    <div>
+    <div className="content-container">
       <h1>Reseñas del Juego</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form-container">
         <textarea
           value={textoReseña}
           onChange={(e) => setTextoReseña(e.target.value)}
           placeholder="Escribe tu reseña"
         />
-        <div>
+        <div className="stars-container">
           {[1, 2, 3, 4, 5].map(star => (
             <span
               key={star}
               onClick={() => setRating(star)}
-              style={{ cursor: 'pointer', color: star <= rating ? 'gold' : 'gray' }}
+              className={star <= rating ? "selected-star" : "star"}
             >
               ★
             </span>
@@ -147,6 +140,8 @@ const Reviews = () => {
           </li>
         ))}
       </ul>
+
+      <button onClick={() => navigate(-1)}>Regresar</button>
 
       <footer>
         <p>©2025, Jóvenes Creativos. María Alquinga - Janine Sánchez</p>

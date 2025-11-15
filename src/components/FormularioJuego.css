@@ -1,0 +1,68 @@
+/* src/components/FormularioJuego.css */
+
+/* Estilos generales para el contenedor */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Estilos de los campos del formulario */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Estilos del botón de envío */
+button {
+  padding: 12px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilo para las etiquetas del checkbox */
+label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Estilos del pie de página */
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #888;
+}
+
+/* Agregar separación entre los campos */
+textarea {
+  min-height: 100px;
+}
+
+/* Ajustar la imagen de portada */
+input[type="text"] {
+  height: 40px;
+}
+
+/* Alinear el texto de los botones */
+button {
+  width: 200px;
+  text-align: center;
+}

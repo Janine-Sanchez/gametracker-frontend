@@ -8,7 +8,7 @@ const Reviews = () => {
   const [rating, setRating] = useState(1);
 
   useEffect(() => {
-    api.get('/reseñas')  // Verifica que la URL sea correcta para el backend
+    api.get('/reviews')  // Verifica que la URL sea correcta para el backend
       .then(response => setReviews(response.data))  // Cambié 'reseñas' por 'reviews'
       .catch(error => console.error('Error al obtener las reseñas', error));
   }, []);
@@ -16,7 +16,7 @@ const Reviews = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const nuevaReseña = { textoReseña, rating };
-    api.post('/reseñas', nuevaReseña);  // Verifica que la URL sea correcta para el backend
+    api.post('/reviews', nuevaReseña);  // Verifica que la URL sea correcta para el backend
     setTextoReseña('');
   };
 

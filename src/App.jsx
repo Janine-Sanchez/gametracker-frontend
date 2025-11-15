@@ -17,7 +17,7 @@ const App = () => {
 
           {/* Rutas para las otras pantallas */}
           <Route path="/biblioteca" element={<BibliotecaJuegos />} />
-          <Route path="/reseñas" element={<Reseñas />} />
+          <Route path="/reviews" element={<Reseñas />} />
           <Route path="/estadisticas" element={<Estadísticas />} />
           <Route path="/formulario-juego/:id?" element={<FormularioJuego />} /> {/* :id? es para editar un juego si tiene ID */}
         </Routes>

@@ -1,0 +1,83 @@
+/* src/components/PantallaPrincipal.css */
+
+/* Contenedor principal */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;  /* Toma toda la altura de la ventana */
+  background-image: url('/images/fondo.jpg');  /* Ruta a tu imagen de fondo */
+  background-size: cover;  /* Asegura que la imagen cubra toda el área */
+  background-position: center;  /* Centra la imagen */
+  background-repeat: no-repeat;  /* Evita que la imagen se repita */
+  padding: 0 10px;
+  box-sizing: border-box;
+  
+  /* Añadir un fondo con transparencia sobre la imagen */
+  position: relative;  /* Permite usar un elemento sobre el fondo */
+}
+
+.main-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Negro con 40% de opacidad */
+  z-index: -1; /* Hace que el overlay esté detrás del contenido */
+}
+
+/* Estilo para el encabezado */
+h1 {
+  color: #ED2213; /* Color blanco para el texto */
+  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Sombra para el texto */
+}
+
+/* Contenedor de los botones */
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+/* Estilo para los botones */
+.styled-button {
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(to right, #1e3a8a, #3b82f6); /* Degradado azul */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  text-align: center;
+}
+
+.styled-button:hover {
+  background: linear-gradient(to right, #3b82f6, #1e3a8a); /* Invertir el gradiente al pasar el ratón */
+  transform: scale(1.1);  /* Efecto de aumento al pasar el ratón */
+}
+
+.styled-button a {
+  color: white;
+  text-decoration: none;  /* Eliminar subrayado del enlace */
+}
+
+/* Estilo del footer */
+footer {
+  margin-top: auto; /* Hace que el footer se pegue abajo */
+  text-align: center;
+  padding: 20px 0;
+  background-color: #1e3a8a;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+}

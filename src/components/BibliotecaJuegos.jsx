@@ -2,93 +2,88 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api'; 
 import { Link, useNavigate } from 'react-router-dom'; 
-import './PantallaBiblioteca.css';  // Importa el archivo CSS
+import './PantallaBiblioteca.css';
 
 const BibliotecaJuegos = () => {
   const [games, setGames] = useState([]);
-  const navigate = useNavigate(); // Usamos useNavigate para la navegación
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get('/games')
       .then(response => {
-        console.log('Juegos obtenidos:', response.data);  // Verifica que los juegos se obtienen correctamente
-
         const gamesWithRatings = response.data.map(async (game) => {
           try {
-            // Cambia la ruta a '/games/${game._id}/reviews' si tu API la tiene así (asumiendo que es más estándar)
-            // Si no, verifica en tu backend cuál es la ruta correcta para obtener reseñas por gameId
             const reviewsResponse = await api.get(`/games/${game._id}/reviews`);
-            console.log(`Reseñas para ${game.titulo}:`, reviewsResponse.data);  // Verifica las reseñas para cada juego
-            
-            // Calcular el rating promedio
             const averageRating = reviewsResponse.data.length > 0
-              ? reviewsResponse.data.reduce((acc, review) => acc + review.puntuacion, 0) / reviewsResponse.data.length
+              ? reviewsResponse.data.reduce((acc, review) => acc + review.puntuacion, 0) /
+                reviewsResponse.data.length
               : null;
 
-            console.log(`Rating promedio para ${game.titulo}:`, averageRating);  // Verifica el rating calculado
-            return { ...game, rating: averageRating };  // Añadir el rating al juego
+            return { ...game, rating: averageRating };
           } catch (error) {
-            console.error(`Error al obtener reseñas para el juego ${game.titulo}:`, error);
-            return { ...game, rating: null };  // Si ocurre un error, asignamos rating null
+            return { ...game, rating: null };
           }
         });
 
-        // Esperar a que todas las promesas se resuelvan
-        Promise.all(gamesWithRatings).then((gamesWithRatings) => {
-          console.log('Juegos con ratings:', gamesWithRatings);  // Verifica que los juegos con ratings se han guardado correctamente
-          setGames(gamesWithRatings);  // Guardamos los juegos con los ratings calculados
+        Promise.all(gamesWithRatings).then((gamesFinal) => {
+          setGames(gamesFinal);
         });
       })
-      .catch(error => console.error('Error al obtener los juegos y reseñas', error));
+      .catch(error => console.error('Error al obtener los juegos', error));
   }, []);
 
-  // Función para eliminar un juego
+  // Eliminar juego
   const handleDelete = async (gameId) => {
-    if (window.confirm('¿Estás seguro de que quieres eliminar este juego?')) {
+    if (window.confirm('¿Seguro deseas eliminar este juego?')) {
       try {
-        const response = await api.delete(`/games/${gameId}`);
-        alert(response.data.message);  // Muestra el mensaje de éxito
-        // Elimina el juego de la lista en el frontend sin necesidad de recargar la página
-        setGames(games.filter(game => game._id !== gameId));
+        await api.delete(`/games/${gameId}`);
+        setGames(games.filter((game) => game._id !== gameId));
       } catch (error) {
-        console.error('Error al eliminar el juego', error);
-        alert('Hubo un error al eliminar el juego');
+        alert('Error al eliminar el juego');
       }
     }
   };
 
   return (
-    <div className="content-container">
+    <div className="biblioteca-container">
       <h1>Biblioteca de Juegos</h1>
+
       <div className="games-list">
         {games.map((game) => (
-          <div key={game._id} className="game-container">
+          <div key={game._id} className="game-card">
             <h3>{game.titulo}</h3>
-            <img 
-              src={game.imagenPortada} 
-              alt={game.titulo} 
-              className="game-image" 
-            />
-            <p>{game.descripcion}</p>
 
-            {/* Mostrar el rating (si está disponible) */}
-            <p>⭐ Rating: {game.rating !== null ? game.rating.toFixed(1) : 'No disponible'}</p>
+            <img src={game.imagenPortada} alt={game.titulo} className="game-image" />
 
-            <Link to={`/formulario-juego/${game._id}`}>
-              <button>Editar</button>
-            </Link>
+            <p className="descripcion">{game.descripcion}</p>
 
-            {/* Botón para eliminar el juego */}
-            <button onClick={() => handleDelete(game._id)}>Eliminar</button>
+            <p className="rating">
+              ⭐ Rating: {game.rating !== null ? game.rating.toFixed(1) : "No disponible"}
+            </p>
+
+            <div className="card-buttons">
+              <Link to={`/formulario-juego/${game._id}`}>
+                <button className="btn-edit">Editar</button>
+              </Link>
+
+              <button className="btn-delete" onClick={() => handleDelete(game._id)}>
+                Eliminar
+              </button>
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Botón de agregar nuevo juego con navegación usando navigate */}
-      <button onClick={() => navigate('/formulario-juego')}>Agregar nuevo juego</button>
+      {/* BOTONES INFERIORES */}
+      <div className="bottom-buttons">
+        <button className="btn-primary" onClick={() => navigate('/formulario-juego')}>
+          Agregar nuevo juego
+        </button>
 
-      {/* Botón de regreso */}
-      <button onClick={() => navigate(-1)}>Regresar</button>
+        <button className="btn-secondary" onClick={() => navigate(-1)}>
+          Regresar
+        </button>
+      </div>
 
       <footer>
         <p>©2025, Jóvenes Creativos. María Alquinga - Janine Sánchez</p>

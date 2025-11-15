@@ -11,13 +11,13 @@ const FormularioJuego = () => {
     plataforma: '',
     añoLanzamiento: '',
     desarrollador: '',
-    imagenPortada: '',  // Aquí debes poner el nombre de la imagen
+    imagenPortada: '',
     descripcion: '',
     completado: false,
   });
 
   const { id } = useParams();
-  const navigate = useNavigate();  // Usamos useNavigate para la navegación
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -34,7 +34,7 @@ const FormularioJuego = () => {
       api.put(`/games/${id}`, game)
         .then(response => {
           alert('Juego actualizado con éxito');
-          navigate('/biblioteca');  // Redirigir a la biblioteca después de la actualización
+          navigate('/biblioteca');
         })
         .catch(error => {
           console.error('Error al actualizar el juego:', error);
@@ -44,7 +44,7 @@ const FormularioJuego = () => {
       api.post('/games', game)
         .then(response => {
           alert('Juego agregado con éxito');
-          navigate('/biblioteca');  // Redirigir a la biblioteca después de agregar el juego
+          navigate('/biblioteca');
         })
         .catch(error => {
           console.error('Error al agregar el juego:', error);
@@ -54,9 +54,9 @@ const FormularioJuego = () => {
   };
 
   return (
-    <div>
+    <div className="formulario-container">
       <h2>{id ? 'Actualizar Juego' : 'Agregar Juego'}</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="form">
         <input
           type="text"
           value={game.titulo}
@@ -92,7 +92,6 @@ const FormularioJuego = () => {
           placeholder="Desarrollador"
           required
         />
-        {/* Aquí agregamos la URL de la imagen local */}
         <input
           type="text"
           value={game.imagenPortada}
@@ -112,11 +111,13 @@ const FormularioJuego = () => {
             onChange={() => setGame({ ...game, completado: !game.completado })}
           />
         </label>
-        <button type="submit">{id ? 'Actualizar' : 'Agregar'} Juego</button>
+        
+        {/* Contenedor de los botones */}
+        <div className="button-container">
+          <button type="submit">{id ? 'Actualizar' : 'Agregar'} Juego</button>
+          <button type="button" onClick={() => navigate(-1)}>Regresar</button>
+        </div>
       </form>
-
-      {/* Botón de regreso a la página anterior */}
-      <button onClick={() => navigate(-1)}>Regresar</button>  {/* Aquí agregamos el botón de regreso */}
 
       <footer>
         <p>©2025, Jóvenes Creativos. María Alquinga - Janine Sánchez</p>
